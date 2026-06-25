@@ -3,1072 +3,669 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>GMAX | Manual de Usuario — Bitácora de Servicios</title>
+<title>GMAX | Manual de Usuario — Bitácora de Servicios v9</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,wght@0,300;0,400;0,500;0,700;1,300&family=DM+Mono:wght@400;500&family=Playfair+Display:wght@700;900&display=swap');
-
   :root {
-    --navy:    #1A3A6B;
-    --blue:    #2E6DA4;
-    --sky:     #4DA6E0;
-    --green:   #1A7A4A;
-    --mint:    #E1F5EE;
-    --amber:   #F59E0B;
-    --red:     #DC2626;
-    --gray-50: #F8F9FB;
-    --gray-100:#F0F2F5;
-    --gray-200:#E2E6ED;
-    --gray-400:#9BA3AE;
-    --gray-600:#4B5563;
-    --gray-900:#111827;
-    --white:   #FFFFFF;
-  }
-
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-  html { scroll-behavior: smooth; }
-
-  body {
-    font-family: 'DM Sans', sans-serif;
-    background: var(--gray-50);
-    color: var(--gray-900);
-    line-height: 1.7;
-  }
-
-  /* ── PORTADA ── */
-  .cover {
-    background: linear-gradient(135deg, var(--navy) 0%, #0d2347 50%, #0a1c36 100%);
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    padding: 4rem 2rem;
-    position: relative;
-    overflow: hidden;
-  }
-
-  .cover::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-      radial-gradient(ellipse 60% 50% at 20% 30%, rgba(77,166,224,0.12) 0%, transparent 60%),
-      radial-gradient(ellipse 40% 60% at 80% 70%, rgba(26,122,74,0.10) 0%, transparent 60%);
-  }
-
-  .cover-badge {
-    display: inline-block;
-    background: rgba(77,166,224,0.15);
-    border: 1px solid rgba(77,166,224,0.3);
-    color: var(--sky);
-    font-size: 0.75rem;
-    font-weight: 500;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    padding: 0.4rem 1.2rem;
-    border-radius: 2rem;
-    margin-bottom: 2rem;
-    position: relative;
-  }
-
-  .cover h1 {
-    font-family: 'Playfair Display', serif;
-    font-size: clamp(2.5rem, 6vw, 4.5rem);
-    font-weight: 900;
-    color: var(--white);
-    line-height: 1.1;
-    margin-bottom: 1rem;
-    position: relative;
-  }
-
-  .cover h1 span { color: var(--sky); }
-
-  .cover-sub {
-    font-size: 1.1rem;
-    color: rgba(255,255,255,0.6);
-    font-weight: 300;
-    max-width: 480px;
-    position: relative;
-    margin-bottom: 3rem;
-  }
-
-  .cover-meta {
-    display: flex;
-    gap: 2rem;
-    position: relative;
-  }
-
-  .cover-meta-item {
-    text-align: center;
-  }
-
-  .cover-meta-item .num {
-    display: block;
-    font-size: 2rem;
-    font-weight: 700;
-    color: var(--sky);
-    line-height: 1;
-  }
-
-  .cover-meta-item .lbl {
-    font-size: 0.75rem;
-    color: rgba(255,255,255,0.5);
-    letter-spacing: 0.08em;
-    text-transform: uppercase;
-  }
-
-  .cover-divider {
-    width: 1px;
-    height: 40px;
-    background: rgba(255,255,255,0.15);
-    align-self: center;
-  }
-
-  /* ── LAYOUT ── */
-  .container {
-    max-width: 900px;
-    margin: 0 auto;
-    padding: 0 1.5rem;
-  }
-
-  /* ── NAV LATERAL ── */
-  .layout {
-    display: grid;
-    grid-template-columns: 220px 1fr;
-    gap: 0;
-    min-height: 100vh;
-  }
-
-  .sidebar {
-    background: var(--white);
-    border-right: 1px solid var(--gray-200);
-    position: sticky;
-    top: 0;
-    height: 100vh;
-    overflow-y: auto;
-    padding: 2rem 0;
-  }
-
-  .sidebar-logo {
-    padding: 0 1.5rem 1.5rem;
-    border-bottom: 1px solid var(--gray-100);
-    margin-bottom: 1.5rem;
-  }
-
-  .sidebar-logo span {
-    font-weight: 700;
-    color: var(--navy);
-    font-size: 0.9rem;
-    letter-spacing: 0.05em;
-  }
-
-  .sidebar-logo small {
-    display: block;
-    color: var(--gray-400);
-    font-size: 0.7rem;
-    margin-top: 2px;
-  }
-
-  .nav-section {
-    padding: 0 0.75rem;
-    margin-bottom: 1rem;
-  }
-
-  .nav-section-title {
-    font-size: 0.65rem;
-    font-weight: 700;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--gray-400);
-    padding: 0 0.75rem;
-    margin-bottom: 0.5rem;
-  }
-
-  .nav-link {
-    display: flex;
-    align-items: center;
-    gap: 0.6rem;
-    padding: 0.45rem 0.75rem;
-    border-radius: 0.5rem;
-    color: var(--gray-600);
-    text-decoration: none;
-    font-size: 0.82rem;
-    font-weight: 400;
-    transition: all 0.15s;
-  }
-
-  .nav-link:hover {
-    background: var(--gray-100);
-    color: var(--navy);
-  }
-
-  .nav-link .dot {
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    background: var(--gray-200);
-    flex-shrink: 0;
-  }
-
-  /* ── CONTENIDO ── */
-  .content {
-    padding: 3rem 2.5rem;
-  }
-
-  /* ── SECCIONES ── */
-  .section {
-    margin-bottom: 4rem;
-    scroll-margin-top: 2rem;
-  }
-
-  .section-eyebrow {
-    font-size: 0.7rem;
-    font-weight: 700;
-    letter-spacing: 0.15em;
-    text-transform: uppercase;
-    color: var(--sky);
-    margin-bottom: 0.5rem;
-  }
-
-  .section-title {
-    font-family: 'Playfair Display', serif;
-    font-size: 1.9rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 1rem;
-    line-height: 1.2;
-  }
-
-  .section-lead {
-    font-size: 1rem;
-    color: var(--gray-600);
-    max-width: 680px;
-    margin-bottom: 2rem;
-    font-weight: 300;
-  }
-
-  /* ── DIVIDER ── */
-  .divider {
-    border: none;
-    border-top: 1px solid var(--gray-200);
-    margin: 3rem 0;
-  }
-
-  /* ── HOJA CARD ── */
-  .sheet-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-    gap: 1rem;
-    margin-bottom: 2rem;
-  }
-
-  .sheet-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 1rem;
-    padding: 1.5rem;
-    transition: box-shadow 0.2s;
-  }
-
-  .sheet-card:hover {
-    box-shadow: 0 4px 20px rgba(0,0,0,0.07);
-  }
-
-  .sheet-card-icon {
-    width: 40px;
-    height: 40px;
-    border-radius: 0.6rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.2rem;
-    margin-bottom: 1rem;
-  }
-
-  .sheet-card h3 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 0.4rem;
-  }
-
-  .sheet-card p {
-    font-size: 0.8rem;
-    color: var(--gray-600);
-    line-height: 1.6;
-  }
-
-  .tag {
-    display: inline-block;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.05em;
-    text-transform: uppercase;
-    padding: 0.2rem 0.5rem;
-    border-radius: 0.25rem;
-    margin-top: 0.75rem;
-  }
-
-  .tag-op    { background: #EEF2FF; color: #4338CA; }
-  .tag-dir   { background: #FEF3C7; color: #92400E; }
-  .tag-auto  { background: #ECFDF5; color: #065F46; }
-
-  /* ── MACRO CARDS ── */
-  .macro-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-  }
-
-  .macro-card {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    display: grid;
-    grid-template-columns: auto 1fr auto;
-    align-items: start;
-    gap: 1rem;
-  }
-
-  .macro-icon {
-    width: 36px;
-    height: 36px;
-    border-radius: 0.5rem;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1rem;
-    flex-shrink: 0;
-  }
-
-  .macro-icon.green  { background: var(--mint); }
-  .macro-icon.blue   { background: #DBEAFE; }
-  .macro-icon.amber  { background: #FEF3C7; }
-  .macro-icon.red    { background: #FEE2E2; }
-
-  .macro-card h4 {
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 0.25rem;
-  }
-
-  .macro-card p {
-    font-size: 0.8rem;
-    color: var(--gray-600);
-    line-height: 1.6;
-  }
-
-  .macro-badge {
-    font-family: 'DM Mono', monospace;
-    font-size: 0.7rem;
-    background: var(--gray-100);
-    color: var(--gray-600);
-    padding: 0.2rem 0.6rem;
-    border-radius: 0.25rem;
-    white-space: nowrap;
-    align-self: flex-start;
-  }
-
-  /* ── BUSCADOR NIVELES ── */
-  .nivel-block {
-    background: var(--white);
-    border: 1px solid var(--gray-200);
-    border-radius: 1rem;
-    overflow: hidden;
-    margin-bottom: 1.5rem;
-  }
-
-  .nivel-header {
-    padding: 1.25rem 1.5rem;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    border-bottom: 1px solid var(--gray-100);
-  }
-
-  .nivel-num {
-    width: 32px;
-    height: 32px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-weight: 700;
-    font-size: 0.85rem;
-    flex-shrink: 0;
-  }
-
-  .nivel-num.n1 { background: var(--navy);  color: white; }
-  .nivel-num.n2 { background: var(--blue);  color: white; }
-  .nivel-num.n3 { background: var(--green); color: white; }
-
-  .nivel-header h3 {
-    font-size: 1rem;
-    font-weight: 700;
-    color: var(--navy);
-  }
-
-  .nivel-header p {
-    font-size: 0.8rem;
-    color: var(--gray-400);
-    margin-top: 0.15rem;
-  }
-
-  .nivel-body {
-    padding: 1.5rem;
-  }
-
-  /* ── FLOW STEPS ── */
-  .flow {
-    display: flex;
-    flex-direction: column;
-    gap: 0;
-  }
-
-  .flow-step {
-    display: grid;
-    grid-template-columns: 28px 1fr;
-    gap: 1rem;
-    padding-bottom: 1.5rem;
-    position: relative;
-  }
-
-  .flow-step:last-child { padding-bottom: 0; }
-
-  .flow-step::before {
-    content: '';
-    position: absolute;
-    left: 13px;
-    top: 28px;
-    bottom: 0;
-    width: 2px;
-    background: var(--gray-200);
-  }
-
-  .flow-step:last-child::before { display: none; }
-
-  .flow-circle {
-    width: 28px;
-    height: 28px;
-    border-radius: 50%;
-    background: var(--navy);
-    color: white;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.75rem;
-    font-weight: 700;
-    flex-shrink: 0;
-    position: relative;
-    z-index: 1;
-  }
-
-  .flow-content h4 {
-    font-size: 0.88rem;
-    font-weight: 700;
-    color: var(--gray-900);
-    margin-bottom: 0.25rem;
-    padding-top: 4px;
-  }
-
-  .flow-content p {
-    font-size: 0.8rem;
-    color: var(--gray-600);
-    line-height: 1.6;
-  }
-
-  /* ── CALLOUT ── */
-  .callout {
-    border-radius: 0.75rem;
-    padding: 1.25rem 1.5rem;
-    margin: 1.5rem 0;
-    display: flex;
-    gap: 1rem;
-    align-items: flex-start;
-  }
-
-  .callout.info   { background: #EFF6FF; border-left: 4px solid var(--blue); }
-  .callout.tip    { background: var(--mint); border-left: 4px solid var(--green); }
-  .callout.warn   { background: #FFFBEB; border-left: 4px solid var(--amber); }
-
-  .callout-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
-
-  .callout-body h4 {
-    font-size: 0.85rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 0.25rem;
-  }
-
-  .callout-body p {
-    font-size: 0.82rem;
-    color: var(--gray-600);
-    line-height: 1.6;
-  }
-
-  /* ── TABLE ── */
-  .ref-table {
-    width: 100%;
-    border-collapse: collapse;
-    font-size: 0.82rem;
-    margin: 1.5rem 0;
-    background: var(--white);
-    border-radius: 0.75rem;
-    overflow: hidden;
-    border: 1px solid var(--gray-200);
-  }
-
-  .ref-table th {
-    background: var(--navy);
-    color: white;
-    padding: 0.75rem 1rem;
-    text-align: left;
-    font-weight: 600;
-    font-size: 0.75rem;
-    letter-spacing: 0.04em;
-  }
-
-  .ref-table td {
-    padding: 0.7rem 1rem;
-    border-bottom: 1px solid var(--gray-100);
-    color: var(--gray-600);
-    vertical-align: top;
-  }
-
-  .ref-table tr:last-child td { border-bottom: none; }
-  .ref-table tr:nth-child(even) td { background: var(--gray-50); }
-
-  .ref-table td strong {
-    color: var(--gray-900);
-    font-weight: 600;
-  }
-
-  /* ── CHIP ── */
-  .chip {
-    display: inline-block;
-    font-family: 'DM Mono', monospace;
-    font-size: 0.72rem;
-    background: var(--gray-100);
-    color: var(--navy);
-    padding: 0.15rem 0.5rem;
-    border-radius: 0.3rem;
-    font-weight: 500;
-  }
-
-  /* ── FOOTER ── */
-  .footer {
-    background: var(--navy);
-    color: rgba(255,255,255,0.5);
-    text-align: center;
-    padding: 2rem;
-    font-size: 0.78rem;
-    margin-top: 4rem;
-  }
-
-  .footer strong { color: white; }
-
-  /* ── RESPONSIVE ── */
-  @media (max-width: 768px) {
-    .layout { grid-template-columns: 1fr; }
-    .sidebar { display: none; }
-    .content { padding: 2rem 1.25rem; }
-    .sheet-grid { grid-template-columns: 1fr; }
-    .macro-card { grid-template-columns: auto 1fr; }
-    .macro-badge { grid-column: 2; }
-    .cover-meta { flex-wrap: wrap; justify-content: center; }
-  }
-
-  @media print {
-    .sidebar { display: none; }
-    .layout { grid-template-columns: 1fr; }
-    .cover { min-height: auto; padding: 3rem 2rem; page-break-after: always; }
-  }
+    --navy:#1A3A6B;--blue:#2E6DA4;--sky:#4DA6E0;--green:#1A7A4A;--mint:#E1F5EE;
+    --amber:#F59E0B;--red:#DC2626;--gray-50:#F8F9FB;--gray-100:#F0F2F5;
+    --gray-200:#E2E6ED;--gray-400:#9BA3AE;--gray-600:#4B5563;--gray-900:#111827;--white:#FFFFFF;
+  }
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  html{scroll-behavior:smooth;}
+  body{font-family:'DM Sans',sans-serif;background:var(--gray-50);color:var(--gray-900);line-height:1.7;}
+  .cover{background:linear-gradient(135deg,var(--navy) 0%,#0d2347 50%,#0a1c36 100%);min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;padding:4rem 2rem;position:relative;overflow:hidden;}
+  .cover::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 20% 30%,rgba(77,166,224,0.12) 0%,transparent 60%),radial-gradient(ellipse 40% 60% at 80% 70%,rgba(26,122,74,0.10) 0%,transparent 60%);}
+  .cover-badge{display:inline-block;background:rgba(77,166,224,0.15);border:1px solid rgba(77,166,224,0.3);color:var(--sky);font-size:0.75rem;font-weight:500;letter-spacing:0.15em;text-transform:uppercase;padding:0.4rem 1.2rem;border-radius:2rem;margin-bottom:2rem;position:relative;}
+  .cover h1{font-family:'Playfair Display',serif;font-size:clamp(2.5rem,6vw,4.5rem);font-weight:900;color:var(--white);line-height:1.1;margin-bottom:1rem;position:relative;}
+  .cover h1 span{color:var(--sky);}
+  .cover-sub{font-size:1.1rem;color:rgba(255,255,255,0.6);font-weight:300;max-width:480px;position:relative;margin-bottom:3rem;}
+  .cover-meta{display:flex;gap:2rem;position:relative;flex-wrap:wrap;justify-content:center;}
+  .cover-meta-item{text-align:center;}
+  .cover-meta-item .num{display:block;font-size:2rem;font-weight:700;color:var(--sky);line-height:1;}
+  .cover-meta-item .lbl{font-size:0.75rem;color:rgba(255,255,255,0.5);letter-spacing:0.08em;text-transform:uppercase;}
+  .cover-divider{width:1px;height:40px;background:rgba(255,255,255,0.15);align-self:center;}
+  .layout{display:grid;grid-template-columns:220px 1fr;gap:0;min-height:100vh;}
+  .sidebar{background:var(--white);border-right:1px solid var(--gray-200);position:sticky;top:0;height:100vh;overflow-y:auto;padding:2rem 0;}
+  .sidebar-logo{padding:0 1.5rem 1.5rem;border-bottom:1px solid var(--gray-100);margin-bottom:1.5rem;}
+  .sidebar-logo span{font-weight:700;color:var(--navy);font-size:0.9rem;letter-spacing:0.05em;}
+  .sidebar-logo small{display:block;color:var(--gray-400);font-size:0.7rem;margin-top:2px;}
+  .nav-section{padding:0 0.75rem;margin-bottom:1rem;}
+  .nav-section-title{font-size:0.65rem;font-weight:700;letter-spacing:0.12em;text-transform:uppercase;color:var(--gray-400);padding:0 0.75rem;margin-bottom:0.5rem;}
+  .nav-link{display:flex;align-items:center;gap:0.6rem;padding:0.45rem 0.75rem;border-radius:0.5rem;color:var(--gray-600);text-decoration:none;font-size:0.82rem;font-weight:400;transition:all 0.15s;}
+  .nav-link:hover{background:var(--gray-100);color:var(--navy);}
+  .nav-link .dot{width:6px;height:6px;border-radius:50%;background:var(--gray-200);flex-shrink:0;}
+  .content{padding:3rem 2.5rem;}
+  .section{margin-bottom:4rem;scroll-margin-top:2rem;}
+  .section-eyebrow{font-size:0.7rem;font-weight:700;letter-spacing:0.15em;text-transform:uppercase;color:var(--sky);margin-bottom:0.5rem;}
+  .section-title{font-family:'Playfair Display',serif;font-size:1.9rem;font-weight:700;color:var(--navy);margin-bottom:1rem;line-height:1.2;}
+  .section-lead{font-size:1rem;color:var(--gray-600);max-width:680px;margin-bottom:2rem;font-weight:300;}
+  .divider{border:none;border-top:1px solid var(--gray-200);margin:3rem 0;}
+  .sheet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:1rem;margin-bottom:2rem;}
+  .sheet-card{background:var(--white);border:1px solid var(--gray-200);border-radius:1rem;padding:1.5rem;transition:box-shadow 0.2s;}
+  .sheet-card:hover{box-shadow:0 4px 20px rgba(0,0,0,0.07);}
+  .sheet-card-icon{width:40px;height:40px;border-radius:0.6rem;display:flex;align-items:center;justify-content:center;font-size:1.2rem;margin-bottom:1rem;}
+  .sheet-card h3{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:0.4rem;}
+  .sheet-card p{font-size:0.8rem;color:var(--gray-600);line-height:1.6;}
+  .tag{display:inline-block;font-size:0.65rem;font-weight:600;letter-spacing:0.05em;text-transform:uppercase;padding:0.2rem 0.5rem;border-radius:0.25rem;margin-top:0.75rem;}
+  .tag-op{background:#EEF2FF;color:#4338CA;}.tag-dir{background:#FEF3C7;color:#92400E;}.tag-auto{background:#ECFDF5;color:#065F46;}.tag-new{background:#FEE2E2;color:#991B1B;}
+  .macro-list{display:flex;flex-direction:column;gap:1rem;}
+  .macro-card{background:var(--white);border:1px solid var(--gray-200);border-radius:0.75rem;padding:1.25rem 1.5rem;display:grid;grid-template-columns:auto 1fr auto;align-items:start;gap:1rem;}
+  .macro-icon{width:36px;height:36px;border-radius:0.5rem;display:flex;align-items:center;justify-content:center;font-size:1rem;flex-shrink:0;}
+  .macro-icon.green{background:var(--mint);}.macro-icon.blue{background:#DBEAFE;}.macro-icon.amber{background:#FEF3C7;}.macro-icon.purple{background:#F3E8FF;}.macro-icon.red{background:#FEE2E2;}
+  .macro-card h4{font-size:0.9rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem;}
+  .macro-card p{font-size:0.8rem;color:var(--gray-600);line-height:1.6;}
+  .macro-badge{font-family:'DM Mono',monospace;font-size:0.7rem;background:var(--gray-100);color:var(--gray-600);padding:0.2rem 0.6rem;border-radius:0.25rem;white-space:nowrap;align-self:flex-start;}
+  .nivel-block{background:var(--white);border:1px solid var(--gray-200);border-radius:1rem;overflow:hidden;margin-bottom:1.5rem;}
+  .nivel-header{padding:1.25rem 1.5rem;display:flex;align-items:center;gap:1rem;border-bottom:1px solid var(--gray-100);}
+  .nivel-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:0.85rem;flex-shrink:0;}
+  .nivel-num.n1{background:var(--navy);color:white;}.nivel-num.n2{background:var(--blue);color:white;}.nivel-num.n3{background:var(--green);color:white;}
+  .nivel-header h3{font-size:1rem;font-weight:700;color:var(--navy);}
+  .nivel-header p{font-size:0.8rem;color:var(--gray-400);margin-top:0.15rem;}
+  .nivel-body{padding:1.5rem;}
+  .flow{display:flex;flex-direction:column;gap:0;}
+  .flow-step{display:grid;grid-template-columns:28px 1fr;gap:1rem;padding-bottom:1.5rem;position:relative;}
+  .flow-step:last-child{padding-bottom:0;}
+  .flow-step::before{content:'';position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--gray-200);}
+  .flow-step:last-child::before{display:none;}
+  .flow-circle{width:28px;height:28px;border-radius:50%;background:var(--navy);color:white;display:flex;align-items:center;justify-content:center;font-size:0.75rem;font-weight:700;flex-shrink:0;position:relative;z-index:1;}
+  .flow-content h4{font-size:0.88rem;font-weight:700;color:var(--gray-900);margin-bottom:0.25rem;padding-top:4px;}
+  .flow-content p{font-size:0.8rem;color:var(--gray-600);line-height:1.6;}
+  .callout{border-radius:0.75rem;padding:1.25rem 1.5rem;margin:1.5rem 0;display:flex;gap:1rem;align-items:flex-start;}
+  .callout.info{background:#EFF6FF;border-left:4px solid var(--blue);}.callout.tip{background:var(--mint);border-left:4px solid var(--green);}.callout.warn{background:#FFFBEB;border-left:4px solid var(--amber);}.callout.new{background:#FFF1F2;border-left:4px solid var(--red);}
+  .callout-icon{font-size:1.2rem;flex-shrink:0;margin-top:2px;}
+  .callout-body h4{font-size:0.85rem;font-weight:700;color:var(--navy);margin-bottom:0.25rem;}
+  .callout-body p{font-size:0.82rem;color:var(--gray-600);line-height:1.6;}
+  .ref-table{width:100%;border-collapse:collapse;font-size:0.82rem;margin:1.5rem 0;background:var(--white);border-radius:0.75rem;overflow:hidden;border:1px solid var(--gray-200);}
+  .ref-table th{background:var(--navy);color:white;padding:0.75rem 1rem;text-align:left;font-weight:600;font-size:0.75rem;letter-spacing:0.04em;}
+  .ref-table td{padding:0.7rem 1rem;border-bottom:1px solid var(--gray-100);color:var(--gray-600);vertical-align:top;}
+  .ref-table tr:last-child td{border-bottom:none;}.ref-table tr:nth-child(even) td{background:var(--gray-50);}
+  .ref-table td strong{color:var(--gray-900);font-weight:600;}
+  .chip{display:inline-block;font-family:'DM Mono',monospace;font-size:0.72rem;background:var(--gray-100);color:var(--navy);padding:0.15rem 0.5rem;border-radius:0.3rem;font-weight:500;}
+  .chip.new{background:#FEE2E2;color:#991B1B;}
+  .two-col{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem;}
+  .card-simple{background:var(--white);border:1px solid var(--gray-200);border-radius:1rem;padding:1.5rem;}
+  .card-simple h3{font-size:1rem;font-weight:700;color:var(--navy);margin-bottom:0.75rem;}
+  .card-simple ul{font-size:0.82rem;color:var(--gray-600);line-height:2;padding-left:1.2rem;}
+  .footer{background:var(--navy);color:rgba(255,255,255,0.5);text-align:center;padding:2rem;font-size:0.78rem;margin-top:4rem;}
+  .footer strong{color:white;}
+  @media (max-width:768px){.layout{grid-template-columns:1fr;}.sidebar{display:none;}.content{padding:2rem 1.25rem;}.sheet-grid{grid-template-columns:1fr;}.macro-card{grid-template-columns:auto 1fr;}.macro-badge{grid-column:2;}.cover-meta{flex-wrap:wrap;justify-content:center;}.two-col{grid-template-columns:1fr;}}
+  @media print{.sidebar{display:none;}.layout{grid-template-columns:1fr;}.cover{min-height:auto;padding:3rem 2rem;page-break-after:always;}}
 </style>
 </head>
 <body>
 
-<!-- PORTADA -->
 <div class="cover">
-  <div class="cover-badge">Manual de Usuario · v8</div>
-  <h1>GMAX | <span>Bitácora de</span><br>Servicios</h1>
+  <div class="cover-badge">Manual de Usuario · v9</div>
+  <h1>GMAX | <span>Control de</span><br>Asignación</h1>
   <p class="cover-sub">Guía completa para el uso del sistema de planeación, asignación y seguimiento de unidades logísticas.</p>
   <div class="cover-meta">
-    <div class="cover-meta-item">
-      <span class="num">8</span>
-      <span class="lbl">Hojas</span>
-    </div>
+    <div class="cover-meta-item"><span class="num">10</span><span class="lbl">Hojas</span></div>
     <div class="cover-divider"></div>
-    <div class="cover-meta-item">
-      <span class="num">22</span>
-      <span class="lbl">Unidades</span>
-    </div>
+    <div class="cover-meta-item"><span class="num">22</span><span class="lbl">Unidades</span></div>
     <div class="cover-divider"></div>
-    <div class="cover-meta-item">
-      <span class="num">38</span>
-      <span class="lbl">Días visibles</span>
-    </div>
+    <div class="cover-meta-item"><span class="num">38</span><span class="lbl">Días visibles</span></div>
     <div class="cover-divider"></div>
-    <div class="cover-meta-item">
-      <span class="num">3</span>
-      <span class="lbl">Tipos de búsqueda</span>
-    </div>
+    <div class="cover-meta-item"><span class="num">10</span><span class="lbl">Subfilas por viaje</span></div>
+    <div class="cover-divider"></div>
+    <div class="cover-meta-item"><span class="num">6</span><span class="lbl">Macros principales</span></div>
   </div>
 </div>
 
-<!-- LAYOUT PRINCIPAL -->
 <div class="layout">
+<aside class="sidebar">
+  <div class="sidebar-logo">
+    <span>GMAX Logistic</span>
+    <small>Bitácora de Servicios v9</small>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Introducción</div>
+    <a href="#intro" class="nav-link"><span class="dot"></span>¿Qué es este reporte?</a>
+    <a href="#hojas" class="nav-link"><span class="dot"></span>Mapa de hojas</a>
+    <a href="#perfiles" class="nav-link"><span class="dot"></span>Perfiles de usuario</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Asignación</div>
+    <a href="#asignacion" class="nav-link"><span class="dot"></span>Hoja de asignación</a>
+    <a href="#subfilas" class="nav-link"><span class="dot"></span>Subfilas v9</a>
+    <a href="#macros-asig" class="nav-link"><span class="dot"></span>Macros de asignación</a>
+    <a href="#propagar" class="nav-link"><span class="dot"></span>Propagar entrega</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Buscador</div>
+    <a href="#buscador" class="nav-link"><span class="dot"></span>Buscador inteligente</a>
+    <a href="#buscar-unidad" class="nav-link"><span class="dot"></span>Buscar por Unidad</a>
+    <a href="#buscar-operador" class="nav-link"><span class="dot"></span>Buscar por Operador</a>
+    <a href="#buscar-folio" class="nav-link"><span class="dot"></span>Buscar por Folio GMX</a>
+    <a href="#niveles-fecha" class="nav-link"><span class="dot"></span>Niveles de fecha</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Catálogos</div>
+    <a href="#operadores" class="nav-link"><span class="dot"></span>Gestión de operadores</a>
+    <a href="#unidades" class="nav-link"><span class="dot"></span>Gestión de unidades</a>
+  </div>
+  <div class="nav-section">
+    <div class="nav-section-title">Fichas</div>
+    <a href="#ficha-individual" class="nav-link"><span class="dot"></span>Ficha Individual</a>
+    <a href="#ficha-colectiva" class="nav-link"><span class="dot"></span>Ficha Colectiva</a>
+  </div>
+</aside>
 
-  <!-- SIDEBAR -->
-  <aside class="sidebar">
-    <div class="sidebar-logo">
-      <span>GMAX Logistic</span>
-      <small>Bitácora de Servicios v8</small>
+<main class="content">
+
+<section class="section" id="intro">
+  <div class="section-eyebrow">Introducción</div>
+  <h2 class="section-title">¿Qué es esta bitácora?</h2>
+  <p class="section-lead">La Bitácora de Servicios GMAX es una herramienta de gestión logística desarrollada en Excel que centraliza la planeación diaria de unidades, el seguimiento de operadores y el historial completo de servicios.</p>
+  <p style="color:var(--gray-600);font-size:0.9rem;margin-bottom:1.5rem;">Permite a los equipos de tráfico planear hasta <strong>38 días</strong> de operación (7 días previos + el día actual + 30 días futuros), registrar hasta <strong>3 viajes por unidad</strong> con <strong>10 campos de información</strong> cada uno, incluyendo fechas y horarios de entrega. Genera fichas individuales y colectivas para compartir con clientes.</p>
+  <div class="callout new">
+    <span class="callout-icon">🆕</span>
+    <div class="callout-body">
+      <h4>Novedades v9</h4>
+      <p>Se agregaron las subfilas <strong>FECHA ENTREGA</strong> y <strong>HORARIO ENTREGA</strong> a cada viaje. Nueva macro <strong>Propagar Entrega</strong> para servicios foráneos. Fichas técnicas individuales y colectivas para enviar a clientes. Licencia de operador fragmentada en 3 campos. Histórico actualizado a 14 columnas.</p>
     </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Introducción</div>
-      <a href="#intro" class="nav-link"><span class="dot"></span>¿Qué es este reporte?</a>
-      <a href="#hojas" class="nav-link"><span class="dot"></span>Mapa de hojas</a>
-      <a href="#perfiles" class="nav-link"><span class="dot"></span>Perfiles de usuario</a>
+  </div>
+  <div class="callout tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <h4>Diseñado para dos perfiles</h4>
+      <p>El área de <strong>Tráfico</strong> lo usa para registrar y planear día a día. La <strong>Dirección</strong> lo consulta para revisar el estado de la operación, el historial de servicios y generar fichas para clientes.</p>
     </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Módulos</div>
-      <a href="#asignacion" class="nav-link"><span class="dot"></span>Asignación diaria</a>
-      <a href="#macros-asig" class="nav-link"><span class="dot"></span>Macros de asignación</a>
-      <a href="#historicos" class="nav-link"><span class="dot"></span>Historiales</a>
-      <a href="#catalogos" class="nav-link"><span class="dot"></span>Catálogos</a>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="hojas">
+  <div class="section-eyebrow">Estructura</div>
+  <h2 class="section-title">Mapa de hojas</h2>
+  <p class="section-lead">El archivo contiene 10 hojas, cada una con un propósito específico.</p>
+  <div class="sheet-grid">
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#EEF2FF;">📅</div>
+      <h3>ASIGNACION</h3>
+      <p>Hoja principal de planeación. Muestra las 22 unidades con sus 3 viajes posibles por día, en un calendario de 38 días. Cada viaje cuenta con 10 campos incluyendo FECHA y HORARIO ENTREGA.</p>
+      <span class="tag tag-op">Operativo diario</span>
     </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Buscador</div>
-      <a href="#buscador" class="nav-link"><span class="dot"></span>Buscador inteligente</a>
-      <a href="#buscar-unidad" class="nav-link"><span class="dot"></span>Buscar por Unidad</a>
-      <a href="#buscar-operador" class="nav-link"><span class="dot"></span>Buscar por Operador</a>
-      <a href="#buscar-folio" class="nav-link"><span class="dot"></span>Buscar por Folio GMX</a>
-      <a href="#niveles-fecha" class="nav-link"><span class="dot"></span>Niveles de fecha</a>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#ECFDF5;">🔍</div>
+      <h3>BUSCADOR</h3>
+      <p>Herramienta de consulta rápida. Permite buscar por ECO de unidad, tracto o caja, por nombre de operador, o por folio GMX. Muestra ficha técnica completa e historial con sistema de fechas en 3 niveles.</p>
+      <span class="tag tag-dir">Consulta</span>
     </div>
-    <div class="nav-section">
-      <div class="nav-section-title">Catálogos</div>
-      <a href="#operadores" class="nav-link"><span class="dot"></span>Gestión de operadores</a>
-      <a href="#unidades" class="nav-link"><span class="dot"></span>Gestión de unidades</a>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#FEF3C7;">📋</div>
+      <h3>HISTORICO_ACTUAL</h3>
+      <p>14 columnas: FECHA, ECO, CAPACIDAD, CAJA, OPERADOR, CLIENTE, ORIGEN, DESTINO, FOLIO, HORARIO CARGA, FECHA ENTREGA, HORARIO ENTREGA, COMENTARIO y N° VIAJE.</p>
+      <span class="tag tag-auto">Automático</span>
     </div>
-  </aside>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#FEE2E2;">📒</div>
+      <h3>HISTORICO_BITACORA</h3>
+      <p>Bitácora manual de incidencias, servicios y eventos operativos. Registro cronológico con ECO de unidad, operador y descripción.</p>
+      <span class="tag tag-op">Operativo diario</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#F3E8FF;">🗄️</div>
+      <h3>HISTORICO_SISTEMA</h3>
+      <p>Base de datos principal de servicios proveniente del sistema GMX. Contiene más de 26,000 registros con folios, estados, empresas, operadores y rutas.</p>
+      <span class="tag tag-dir">Consulta</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#DBEAFE;">👷</div>
+      <h3>OPERADORES</h3>
+      <p>Catálogo completo con 14 columnas: nombre, credencial, teléfono, RCONTROL, No. Empleado, RFC, NSS, CURP, N° Licencia, Tipo Licencia, Vigencia Licencia e INE.</p>
+      <span class="tag tag-op">Catálogo</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#ECFDF5;">🚛</div>
+      <h3>UNIDADES</h3>
+      <p>Catálogo de tractos con ECO, modelo, capacidad, placas y color. Incluye formulario de alta de nuevas unidades.</p>
+      <span class="tag tag-op">Catálogo</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#FEF9C3;">📦</div>
+      <h3>CATALOGOS</h3>
+      <p>Listas desplegables con ECOs de tractos y cajas, nombres de operadores, clientes, orígenes (1,049) y destinos (2,184) únicos del histórico del sistema.</p>
+      <span class="tag tag-auto">Sistema</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#FEE2E2;">👤</div>
+      <h3>FICHA INDIVIDUAL</h3>
+      <p>Genera la ficha técnica de un operador para una fecha y viaje seleccionados. Incluye datos del tracto, caja y operador. Diseñada para enviar al cliente por correo.</p>
+      <span class="tag tag-new">Nuevo v9</span>
+    </div>
+    <div class="sheet-card">
+      <div class="sheet-card-icon" style="background:#F3E8FF;">👥</div>
+      <h3>FICHA COLECTIVA</h3>
+      <p>Genera un reporte con múltiples operadores para una misma fecha. Permite especificar el tipo de viaje por operador individualmente. Ideal para envíos masivos al cliente.</p>
+      <span class="tag tag-new">Nuevo v9</span>
+    </div>
+  </div>
+</section>
 
-  <!-- CONTENIDO -->
-  <main class="content">
+<hr class="divider">
 
-    <!-- INTRODUCCIÓN -->
-    <section class="section" id="intro">
-      <div class="section-eyebrow">Introducción</div>
-      <h2 class="section-title">¿Qué es este reporte?</h2>
-      <p class="section-lead">La Bitácora de Servicios GMAX es una herramienta de gestión logística desarrollada en Excel que centraliza la planeación diaria de unidades, el seguimiento de operadores y el historial completo de servicios.</p>
-      <p style="color:var(--gray-600); font-size:0.9rem; margin-bottom:1.5rem;">Permite a los equipos de tráfico planear hasta <strong>38 días</strong> de operación (7 días previos + el día actual + 30 días futuros), registrar múltiples viajes por unidad, consultar el historial de servicios y mantener catálogos actualizados de operadores, unidades y cajas. Todo en un solo archivo con actualización automática mediante macros.</p>
+<section class="section" id="asignacion">
+  <div class="section-eyebrow">Módulo principal</div>
+  <h2 class="section-title">Hoja de Asignación</h2>
+  <p class="section-lead">El corazón del sistema. Cada unidad tiene 3 filas de viaje expandibles y un calendario de 38 días donde se registra la operación diaria. Los domingos aparecen en gris para identificarlos fácilmente.</p>
+</section>
 
-      <div class="callout tip">
-        <span class="callout-icon">✅</span>
-        <div class="callout-body">
-          <h4>Diseñado para dos perfiles</h4>
-          <p>El área de <strong>Tráfico</strong> lo usa para registrar y planear día a día. La <strong>Dirección</strong> lo consulta para revisar el estado de la operación y el historial de servicios.</p>
-        </div>
+<section class="section" id="subfilas">
+  <div class="section-eyebrow">Estructura v9</div>
+  <h2 class="section-title">10 Subfilas por viaje</h2>
+  <table class="ref-table">
+    <thead><tr><th>Subfila</th><th>Campo</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip">+0</span></td><td><strong>Comentario</strong></td><td>Nota general del servicio (celda combinada)</td></tr>
+      <tr><td><span class="chip">+1</span></td><td><strong>Folio GMX</strong></td><td>Número de folio asignado por el sistema GMX</td></tr>
+      <tr><td><span class="chip">+2</span></td><td><strong>Caja</strong></td><td>ECO de caja asignada — se busca automáticamente en catálogo</td></tr>
+      <tr><td><span class="chip">+3</span></td><td><strong>Horario Carga</strong></td><td>Hora de salida — doble clic abre selector de hora</td></tr>
+      <tr><td><span class="chip">+4</span></td><td><strong>Operador</strong></td><td>Nombre del operador — seleccionable desde lista desplegable</td></tr>
+      <tr><td><span class="chip">+5</span></td><td><strong>Cliente</strong></td><td>Empresa cliente — seleccionable desde lista desplegable</td></tr>
+      <tr><td><span class="chip">+6</span></td><td><strong>Origen</strong></td><td>Punto de origen del servicio</td></tr>
+      <tr><td><span class="chip">+7</span></td><td><strong>Destino</strong></td><td>Punto de destino del servicio</td></tr>
+      <tr><td><span class="chip new">+8</span></td><td><strong>Fecha Entrega</strong></td><td>Fecha en que se entrega al cliente — doble clic abre calendario</td></tr>
+      <tr><td><span class="chip new">+9</span></td><td><strong>Horario Entrega</strong></td><td>Hora de entrega al cliente — doble clic abre selector de hora</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <h4>Viajes adicionales (1.1 y 1.2)</h4>
+      <p>Cada unidad puede tener hasta <strong>3 viajes por día</strong>. Los viajes adicionales (Viaje 2 y Viaje 3) aparecen agrupados y ocultos. Para expandirlos, haz clic en el botón <strong>[+]</strong> que aparece a la izquierda de la fila de la unidad.</p>
+    </div>
+  </div>
+  <h3 style="font-size:1rem;font-weight:700;color:var(--navy);margin:2rem 0 1rem;">Calendario de 38 días</h3>
+  <p style="font-size:0.85rem;color:var(--gray-600);margin-bottom:1rem;">El calendario siempre muestra <strong>7 días previos</strong> al día actual, el <strong>día de hoy</strong> (marcado en verde) y <strong>30 días futuros</strong>. Los domingos aparecen en gris para identificarlos fácilmente.</p>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="macros-asig">
+  <div class="section-eyebrow">Automatización</div>
+  <h2 class="section-title">Macros de Asignación</h2>
+  <p class="section-lead">Cuatro botones en la parte superior de la hoja controlan las operaciones principales del calendario.</p>
+  <div class="macro-list">
+    <div class="macro-card">
+      <div class="macro-icon green">💾</div>
+      <div>
+        <h4>Guardar Registro</h4>
+        <p>Guarda en el historial todos los registros visibles del calendario que tengan datos. Detecta automáticamente duplicados exactos (los omite sin preguntar) y registros con cambios respecto a lo guardado previamente. En ese caso muestra un resumen con las diferencias — incluyendo FECHA y HORARIO ENTREGA — y permite elegir: <strong>Sobrescribir todos</strong>, <strong>Revisar uno por uno</strong> o <strong>Ignorar todos</strong>.</p>
       </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- MAPA DE HOJAS -->
-    <section class="section" id="hojas">
-      <div class="section-eyebrow">Estructura</div>
-      <h2 class="section-title">Mapa de hojas</h2>
-      <p class="section-lead">El archivo contiene 8 hojas, cada una con un propósito específico.</p>
-
-      <div class="sheet-grid">
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#EEF2FF;">📅</div>
-          <h3>ASIGNACION</h3>
-          <p>Hoja principal de planeación. Muestra las 22 unidades con sus 3 viajes posibles por día, en un calendario de 38 días. Aquí se registra el operador, cliente, origen, destino y folio de cada servicio.</p>
-          <span class="tag tag-op">Operativo diario</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#ECFDF5;">🔍</div>
-          <h3>BUSCADOR</h3>
-          <p>Herramienta de consulta rápida. Permite buscar por ECO de unidad, tracto o caja, por nombre de operador, o por folio GMX. Muestra ficha técnica completa e historial de los últimos registros.</p>
-          <span class="tag tag-dir">Consulta</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#FEF3C7;">📋</div>
-          <h3>HISTORICO_ACTUAL</h3>
-          <p>Registro de todos los servicios guardados desde la hoja de asignación. Se actualiza automáticamente al ejecutar la macro de guardar registros.</p>
-          <span class="tag tag-auto">Automático</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#FEE2E2;">📒</div>
-          <h3>HISTORICO_BITACORA</h3>
-          <p>Bitácora manual de incidencias, servicios y eventos operativos. Registro cronológico con ECO de unidad, operador y descripción del servicio o incidencia.</p>
-          <span class="tag tag-op">Operativo diario</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#F3E8FF;">🗄️</div>
-          <h3>HISTORICO_SISTEMA</h3>
-          <p>Base de datos principal de servicios proveniente del sistema GMX. Contiene más de 26,000 registros con folios, estados, empresas, operadores y rutas.</p>
-          <span class="tag tag-dir">Consulta</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#DBEAFE;">👷</div>
-          <h3>OPERADORES</h3>
-          <p>Catálogo completo de operadores con ficha técnica: nombre, credencial, teléfono, RCONTROL, RFC, NSS, CURP, licencia e INE. Incluye formulario de alta de nuevos operadores.</p>
-          <span class="tag tag-op">Catálogo</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#ECFDF5;">🚛</div>
-          <h3>UNIDADES</h3>
-          <p>Catálogo de tractos con ECO, modelo, capacidad, placas y color. Incluye formulario de alta de nuevas unidades.</p>
-          <span class="tag tag-op">Catálogo</span>
-        </div>
-        <div class="sheet-card">
-          <div class="sheet-card-icon" style="background:#FEF9C3;">📦</div>
-          <h3>CATALOGOS</h3>
-          <p>Hoja de listas desplegables. Contiene los ECOs de tractos y cajas, nombres de operadores, clientes, orígenes y destinos que alimentan los campos de selección en toda la aplicación.</p>
-          <span class="tag tag-auto">Sistema</span>
-        </div>
+      <span class="macro-badge">GUARDAR REGISTRO</span>
+    </div>
+    <div class="macro-card">
+      <div class="macro-icon blue">📍</div>
+      <div>
+        <h4>Ir a Hoy</h4>
+        <p>Inmoviliza los paneles de la hoja para que las columnas de información de unidad queden fijas, y navega automáticamente a la columna del día actual. Detecta la fecha del sistema sin importar cuántas veces se haya renovado el calendario.</p>
       </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- ASIGNACIÓN -->
-    <section class="section" id="asignacion">
-      <div class="section-eyebrow">Módulo principal</div>
-      <h2 class="section-title">Hoja de Asignación</h2>
-      <p class="section-lead">El corazón del sistema. Cada unidad tiene 3 filas de viaje expandibles y un calendario de 38 días donde se registra la operación diaria.</p>
-
-      <h3 style="font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:1rem;">Estructura por unidad</h3>
-      <table class="ref-table">
-        <thead>
-          <tr><th>Subfila</th><th>Campo</th><th>Descripción</th></tr>
-        </thead>
-        <tbody>
-          <tr><td><span class="chip">+0</span></td><td><strong>Comentario</strong></td><td>Nota general del servicio (celda combinada)</td></tr>
-          <tr><td><span class="chip">+1</span></td><td><strong>Folio GMX</strong></td><td>Número de folio asignado por el sistema GMX</td></tr>
-          <tr><td><span class="chip">+2</span></td><td><strong>Caja</strong></td><td>ECO de caja asignada — se busca automáticamente en catálogo</td></tr>
-          <tr><td><span class="chip">+3</span></td><td><strong>Horario</strong></td><td>Hora de salida (doble clic abre selector de hora)</td></tr>
-          <tr><td><span class="chip">+4</span></td><td><strong>Operador</strong></td><td>Nombre del operador — seleccionable desde lista desplegable</td></tr>
-          <tr><td><span class="chip">+5</span></td><td><strong>Cliente</strong></td><td>Empresa cliente — seleccionable desde lista desplegable</td></tr>
-          <tr><td><span class="chip">+6</span></td><td><strong>Origen</strong></td><td>Punto de origen del servicio</td></tr>
-          <tr><td><span class="chip">+7</span></td><td><strong>Destino</strong></td><td>Punto de destino del servicio</td></tr>
-        </tbody>
-      </table>
-
-      <div class="callout info">
-        <span class="callout-icon">💡</span>
-        <div class="callout-body">
-          <h4>Viajes adicionales (1.1 y 1.2)</h4>
-          <p>Cada unidad puede tener hasta <strong>3 viajes por día</strong>. Los viajes adicionales (Viaje 2 y Viaje 3) aparecen agrupados y ocultos. Para expandirlos, haz clic en el botón <strong>[+]</strong> que aparece a la izquierda de la fila de la unidad.</p>
-        </div>
+      <span class="macro-badge">IR A HOY</span>
+    </div>
+    <div class="macro-card">
+      <div class="macro-icon amber">🔄</div>
+      <div>
+        <h4>Renovar Calendario</h4>
+        <p>Actualiza el calendario para que el día de hoy sea la nueva fecha ancla. <strong>Desplaza los registros existentes</strong> a su nueva posición de columna según la fecha — los datos de fechas que queden fuera del rango visible se eliminan. Maneja correctamente los 10 campos de cada viaje incluyendo FECHA y HORARIO ENTREGA. Lanza <strong>doble confirmación</strong> antes de ejecutarse.</p>
       </div>
-
-      <h3 style="font-size:1rem; font-weight:700; color:var(--navy); margin:2rem 0 1rem;">Calendario de 38 días</h3>
-      <p style="font-size:0.85rem; color:var(--gray-600); margin-bottom:1rem;">El calendario siempre muestra <strong>7 días previos</strong> al día actual, el <strong>día de hoy</strong> (marcado en verde) y <strong>30 días futuros</strong>. Los domingos aparecen en gris para identificarlos fácilmente.</p>
-    </section>
-
-    <hr class="divider">
-
-    <!-- MACROS ASIGNACIÓN -->
-    <section class="section" id="macros-asig">
-      <div class="section-eyebrow">Automatización</div>
-      <h2 class="section-title">Macros de Asignación</h2>
-      <p class="section-lead">Tres botones en la parte superior de la hoja controlan las operaciones principales del calendario.</p>
-
-      <div class="macro-list">
-        <div class="macro-card">
-          <div class="macro-icon green">💾</div>
-          <div>
-            <h4>Guardar Registro</h4>
-            <p>Guarda en el historial todos los registros visibles del calendario que tengan datos. Detecta automáticamente duplicados exactos (los omite sin preguntar) y registros con cambios respecto a lo guardado previamente. En ese caso muestra un resumen con las diferencias y permite elegir: <strong>Sobrescribir todos</strong>, <strong>Revisar uno por uno</strong> o <strong>Ignorar todos</strong>.</p>
-          </div>
-          <span class="macro-badge">GUARDAR REGISTRO</span>
-        </div>
-
-        <div class="macro-card">
-          <div class="macro-icon blue">📍</div>
-          <div>
-            <h4>Ir a Hoy</h4>
-            <p>Inmoviliza los paneles de la hoja para que las columnas de información de unidad queden fijas, y navega automáticamente a la columna del día actual. Útil cuando el calendario ha avanzado y el día de hoy no está visible en pantalla.</p>
-          </div>
-          <span class="macro-badge">IR A HOY</span>
-        </div>
-
-        <div class="macro-card">
-          <div class="macro-icon amber">🔄</div>
-          <div>
-            <h4>Renovar Calendario</h4>
-            <p>Actualiza el calendario para que el día de hoy sea la nueva fecha ancla. <strong>Desplaza los registros existentes</strong> a su nueva posición de columna según la fecha — los datos de fechas que queden fuera del rango visible se eliminan. Lanza <strong>doble confirmación</strong> antes de ejecutarse y avisa si hay registros sin guardar en las fechas que se perderán.</p>
-          </div>
-          <span class="macro-badge">RENOVAR CALENDARIO</span>
-        </div>
+      <span class="macro-badge">RENOVAR CALENDARIO</span>
+    </div>
+    <div class="macro-card">
+      <div class="macro-icon purple">📤</div>
+      <div>
+        <h4>Propagar Entrega</h4>
+        <p>Para servicios foráneos que se entregan días después de la asignación, esta macro copia automáticamente todos los datos del viaje en las columnas adyacentes hasta la fecha de entrega. Facilita la trazabilidad en el calendario sin necesidad de capturar la información en cada día individualmente.</p>
       </div>
+      <span class="macro-badge">PROPAGAR ENTREGA</span>
+    </div>
+  </div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <h4>Antes de renovar el calendario</h4>
+      <p>Se recomienda ejecutar <strong>Guardar Registro</strong> antes de renovar el calendario, para asegurarse de que todos los datos queden resguardados en el historial antes de que las fechas antiguas desaparezcan del rango visible.</p>
+    </div>
+  </div>
+</section>
 
-      <div class="callout warn">
-        <span class="callout-icon">⚠️</span>
-        <div class="callout-body">
-          <h4>Antes de renovar el calendario</h4>
-          <p>Se recomienda ejecutar <strong>Guardar Registro</strong> antes de renovar el calendario, para asegurarse de que todos los datos queden resguardados en el historial antes de que las fechas antiguas desaparezcan del rango visible.</p>
-        </div>
+<hr class="divider">
+
+<section class="section" id="propagar">
+  <div class="section-eyebrow">Nuevo en v9</div>
+  <h2 class="section-title">Propagar Entrega</h2>
+  <p class="section-lead">Para servicios foráneos que se entregan días después de la asignación, esta macro copia automáticamente los datos del viaje en las columnas correspondientes.</p>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-circle">1</div>
+      <div class="flow-content">
+        <h4>Llenar el viaje normalmente</h4>
+        <p>Registra operador, cliente, origen, destino, folio y horario de carga en el día de asignación.</p>
       </div>
-    </section>
-
-    <hr class="divider">
-
-    <!-- BUSCADOR -->
-    <section class="section" id="buscador">
-      <div class="section-eyebrow">Consulta</div>
-      <h2 class="section-title">Buscador Inteligente</h2>
-      <p class="section-lead">La hoja BUSCADOR permite consultar el historial completo de cualquier unidad, operador o folio en segundos. Tiene tres modos de búsqueda independientes.</p>
-
-      <div class="callout tip">
-        <span class="callout-icon">🔍</span>
-        <div class="callout-body">
-          <h4>Limpia antes de cada búsqueda nueva</h4>
-          <p>Cada sección tiene su propio botón <strong>[LIMPIAR]</strong>. Úsalo antes de hacer una nueva búsqueda para evitar que resultados anteriores interfieran con los nuevos.</p>
-        </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">2</div>
+      <div class="flow-content">
+        <h4>Agregar FECHA y HORARIO ENTREGA</h4>
+        <p>En las subfilas +8 y +9, registra la fecha en que se entregará al cliente y la hora estimada. Doble clic abre el calendario o el selector de hora respectivamente.</p>
       </div>
-    </section>
-
-    <!-- BUSCAR POR UNIDAD -->
-    <section class="section" id="buscar-unidad">
-      <div class="section-eyebrow">Buscador · Modo 1</div>
-      <h2 class="section-title">Buscar por Unidad</h2>
-      <p class="section-lead">Permite consultar el historial de un tracto, caja o ECO de unidad. Se pueden ingresar uno, dos o los tres campos simultáneamente.</p>
-
-      <h3 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:1rem;">Campos de entrada</h3>
-      <table class="ref-table">
-        <thead><tr><th>Campo</th><th>Celda</th><th>Descripción</th></tr></thead>
-        <tbody>
-          <tr><td><strong>ECO Unidad</strong></td><td><span class="chip">C4</span></td><td>ECO combinado (ej. 138/142). Busca en Bitácora.</td></tr>
-          <tr><td><strong>ECO Tracto</strong></td><td><span class="chip">F4</span></td><td>Número de tracto. Busca en Sistema y Actual.</td></tr>
-          <tr><td><strong>ECO Caja</strong></td><td><span class="chip">C5</span></td><td>Número de caja. Busca en Sistema y Actual.</td></tr>
-          <tr><td><strong>Fecha consulta</strong></td><td><span class="chip">F5</span></td><td>Fecha global para filtrar resultados (doble clic = hoy).</td></tr>
-        </tbody>
-      </table>
-
-      <h3 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin:1.5rem 0 1rem;">Resultados que muestra</h3>
-      <table class="ref-table">
-        <thead><tr><th>Sección</th><th>Contenido</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Info General Tracto</strong></td><td>Último operador, última caja, modelo, placas, color, capacidad, licencia y estatus del operador.</td></tr>
-          <tr><td><strong>Info General Caja</strong></td><td>Último operador, licencia, placas y último tracto con que operó.</td></tr>
-          <tr><td><strong>Histórico Bitácora</strong></td><td>Últimos 7 registros de la bitácora manual para ese ECO de unidad.</td></tr>
-          <tr><td><strong>Histórico Sistema (Tracto)</strong></td><td>Últimos 7 servicios del tracto en el Sistema GMX.</td></tr>
-          <tr><td><strong>Histórico Sistema (Caja)</strong></td><td>Últimos 7 servicios de la caja en el Sistema GMX.</td></tr>
-          <tr><td><strong>Histórico Actual (Tracto/Caja)</strong></td><td>Últimos 7 registros guardados desde la hoja de asignación.</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- BUSCAR POR OPERADOR -->
-    <section class="section" id="buscar-operador">
-      <div class="section-eyebrow">Buscador · Modo 2</div>
-      <h2 class="section-title">Buscar por Operador</h2>
-      <p class="section-lead">Muestra la ficha técnica completa del operador y su historial de servicios en los tres historiales.</p>
-
-      <h3 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin-bottom:1rem;">Ficha técnica del operador</h3>
-      <table class="ref-table">
-        <thead><tr><th>Campo</th><th>Fuente</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Nombre, NSS, Credencial</strong></td><td>Catálogo de Operadores</td></tr>
-          <tr><td><strong>Teléfono, CURP, RCONTROL</strong></td><td>Catálogo de Operadores</td></tr>
-          <tr><td><strong>No. Empleado, Estatus, INE</strong></td><td>Catálogo de Operadores</td></tr>
-          <tr><td><strong>RFC, Licencia, Capacidad</strong></td><td>Catálogo de Operadores</td></tr>
-          <tr><td><strong>Último tracto, Última caja</strong></td><td>Histórico Actual → Histórico Sistema</td></tr>
-          <tr><td><strong>Último destino, Nota</strong></td><td>Histórico Actual → Histórico Sistema</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- BUSCAR POR FOLIO -->
-    <section class="section" id="buscar-folio">
-      <div class="section-eyebrow">Buscador · Modo 3</div>
-      <h2 class="section-title">Buscar por Folio GMX</h2>
-      <p class="section-lead">Búsqueda puntual por número de folio. Ingresa el folio en formato <span class="chip">GMX-XXXXX</span> y el sistema despliega todos los datos del servicio al instante.</p>
-
-      <table class="ref-table">
-        <thead><tr><th>Campo resultado</th><th>Descripción</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Folio GMX / Estado</strong></td><td>Número de folio y estado actual del servicio (Facturado, Entregado, Cancelado, etc.)</td></tr>
-          <tr><td><strong>Empresa / Tipo de viaje</strong></td><td>Cliente y modalidad del servicio (Local, Foráneo, etc.)</td></tr>
-          <tr><td><strong>Origen / Destino</strong></td><td>Punto de salida y llegada del servicio</td></tr>
-          <tr><td><strong>Operador / Tipo de vehículo</strong></td><td>Quién operó y qué tipo de unidad se usó</td></tr>
-          <tr><td><strong>ECO Tracto / ECO Caja</strong></td><td>Unidades asignadas al servicio</td></tr>
-          <tr><td><strong>Fecha carga / Notas</strong></td><td>Fecha del servicio y observaciones adicionales</td></tr>
-        </tbody>
-      </table>
-    </section>
-
-    <!-- NIVELES DE FECHA -->
-    <section class="section" id="niveles-fecha">
-      <div class="section-eyebrow">Buscador · Filtrado</div>
-      <h2 class="section-title">Sistema de fechas en 3 niveles</h2>
-      <p class="section-lead">El buscador tiene un sistema inteligente de filtrado por fecha que funciona de forma independiente para cada bloque de resultados.</p>
-
-      <div class="nivel-block">
-        <div class="nivel-header">
-          <div class="nivel-num n1">1</div>
-          <div>
-            <h3>Fecha en el rango del bloque</h3>
-            <p>Prioridad más alta — se usa si el usuario la ingresa directamente</p>
-          </div>
-        </div>
-        <div class="nivel-body">
-          <p style="font-size:0.85rem; color:var(--gray-600);">Cada tabla de resultados tiene una columna de fecha (por ejemplo <span class="chip">B25:B31</span> para Histórico Sistema Tracto). Si el usuario escribe una o varias fechas directamente en esas celdas <strong>antes de consultar</strong>, el buscador filtra únicamente los registros de esas fechas específicas. Se pueden poner hasta 7 fechas diferentes para consultar múltiples días a la vez.</p>
-        </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">3</div>
+      <div class="flow-content">
+        <h4>Ejecutar PROPAGAR ENTREGA</h4>
+        <p>La macro calcula cuántos días hay entre la fecha de asignación y la fecha de entrega, y copia todos los datos del viaje en esas columnas adyacentes. Los días propagados quedan visibles en el calendario para facilitar el seguimiento.</p>
       </div>
+    </div>
+  </div>
+  <div class="callout tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <h4>Edición manual después de propagar</h4>
+      <p>Si hay algún cambio después de propagar, puedes editar directamente las celdas afectadas sin restricciones. La macro solo copia valores, no fórmulas.</p>
+    </div>
+  </div>
+</section>
 
-      <div class="nivel-block">
-        <div class="nivel-header">
-          <div class="nivel-num n2">2</div>
-          <div>
-            <h3>Fecha global F5</h3>
-            <p>Se usa cuando no hay fecha en el rango del bloque</p>
-          </div>
-        </div>
-        <div class="nivel-body">
-          <p style="font-size:0.85rem; color:var(--gray-600);">Si el rango del bloque está vacío pero la celda <span class="chip">F5</span> tiene una fecha (doble clic para poner la fecha de hoy), todos los bloques sin fecha propia usarán esa fecha como filtro global.</p>
-        </div>
+<hr class="divider">
+
+<section class="section" id="buscador">
+  <div class="section-eyebrow">Consulta</div>
+  <h2 class="section-title">Buscador Inteligente</h2>
+  <p class="section-lead">La hoja BUSCADOR permite consultar el historial completo de cualquier unidad, operador o folio en segundos. Tiene tres modos de búsqueda independientes.</p>
+  <div class="callout tip">
+    <span class="callout-icon">🔍</span>
+    <div class="callout-body">
+      <h4>Limpia antes de cada búsqueda nueva</h4>
+      <p>Cada sección tiene su propio botón <strong>[LIMPIAR]</strong>. Úsalo antes de hacer una nueva búsqueda para evitar que resultados anteriores interfieran con los nuevos.</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="buscar-unidad">
+  <div class="section-eyebrow">Buscador · Modo 1</div>
+  <h2 class="section-title">Buscar por Unidad</h2>
+  <p class="section-lead">Permite consultar el historial de un tracto, caja o ECO de unidad. Se pueden ingresar uno, dos o los tres campos simultáneamente.</p>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:1rem;">Campos de entrada</h3>
+  <table class="ref-table">
+    <thead><tr><th>Campo</th><th>Celda</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><strong>ECO Unidad</strong></td><td><span class="chip">C4</span></td><td>ECO combinado (ej. 138/142). Busca en Bitácora.</td></tr>
+      <tr><td><strong>ECO Tracto</strong></td><td><span class="chip">F4</span></td><td>Número de tracto. Busca en Sistema y Actual.</td></tr>
+      <tr><td><strong>ECO Caja</strong></td><td><span class="chip">C5</span></td><td>Número de caja. Busca en Sistema y Actual.</td></tr>
+      <tr><td><strong>Fecha consulta</strong></td><td><span class="chip">F5</span></td><td>Fecha global para filtrar resultados (doble clic = hoy).</td></tr>
+    </tbody>
+  </table>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin:1.5rem 0 1rem;">Resultados que muestra</h3>
+  <table class="ref-table">
+    <thead><tr><th>Sección</th><th>Contenido</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Info General Tracto</strong></td><td>Último operador, última caja, modelo, placas, color, capacidad, licencia y estatus del operador.</td></tr>
+      <tr><td><strong>Info General Caja</strong></td><td>Último operador, licencia, placas y último tracto con que operó.</td></tr>
+      <tr><td><strong>Histórico Bitácora</strong></td><td>Últimos 7 registros de la bitácora manual para ese ECO de unidad.</td></tr>
+      <tr><td><strong>Histórico Sistema (Tracto)</strong></td><td>Últimos 7 servicios del tracto en el Sistema GMX.</td></tr>
+      <tr><td><strong>Histórico Sistema (Caja)</strong></td><td>Últimos 7 servicios de la caja en el Sistema GMX.</td></tr>
+      <tr><td><strong>Histórico Actual (Tracto/Caja)</strong></td><td>Últimos 7 registros guardados desde la hoja de asignación, incluyendo FECHA y HORARIO ENTREGA.</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <h4>Fechas del Histórico Actual en v9</h4>
+      <p>Para filtrar el Histórico Actual por fecha en la sección de <strong>Cajas</strong>, usa el rango <span class="chip">Q35:Q41</span> (desplazado en v9 por las nuevas columnas de FECHA y HORARIO ENTREGA).</p>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="buscar-operador">
+  <div class="section-eyebrow">Buscador · Modo 2</div>
+  <h2 class="section-title">Buscar por Operador</h2>
+  <p class="section-lead">Muestra la ficha técnica completa del operador y su historial de servicios en los tres historiales.</p>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:1rem;">Ficha técnica del operador</h3>
+  <table class="ref-table">
+    <thead><tr><th>Campo</th><th>Fuente</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Nombre, NSS, Credencial</strong></td><td>Catálogo de Operadores</td></tr>
+      <tr><td><strong>Teléfono, CURP, RCONTROL</strong></td><td>Catálogo de Operadores</td></tr>
+      <tr><td><strong>No. Empleado, Estatus, INE</strong></td><td>Catálogo de Operadores</td></tr>
+      <tr><td><strong>RFC, Licencia (concatenada)</strong></td><td>Catálogo de Operadores — se muestra como: <em>Tipo A | No. LFD00014069 | Vig. 2027</em></td></tr>
+      <tr><td><strong>Último tracto, Última caja</strong></td><td>Histórico Actual → Histórico Sistema</td></tr>
+      <tr><td><strong>Último destino, Nota</strong></td><td>Histórico Actual → Histórico Sistema</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section" id="buscar-folio">
+  <div class="section-eyebrow">Buscador · Modo 3</div>
+  <h2 class="section-title">Buscar por Folio GMX</h2>
+  <p class="section-lead">Búsqueda puntual por número de folio. Ingresa el folio en formato <span class="chip">GMX-XXXXX</span> y el sistema despliega todos los datos del servicio al instante.</p>
+  <table class="ref-table">
+    <thead><tr><th>Campo resultado</th><th>Descripción</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Folio GMX / Estado</strong></td><td>Número de folio y estado actual del servicio (Facturado, Entregado, Cancelado, etc.)</td></tr>
+      <tr><td><strong>Empresa / Tipo de viaje</strong></td><td>Cliente y modalidad del servicio (Local, Foráneo, etc.)</td></tr>
+      <tr><td><strong>Origen / Destino</strong></td><td>Punto de salida y llegada del servicio</td></tr>
+      <tr><td><strong>Operador / Tipo de vehículo</strong></td><td>Quién operó y qué tipo de unidad se usó</td></tr>
+      <tr><td><strong>ECO Tracto / ECO Caja</strong></td><td>Unidades asignadas al servicio</td></tr>
+      <tr><td><strong>Fecha carga / Notas</strong></td><td>Fecha del servicio y observaciones adicionales</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<section class="section" id="niveles-fecha">
+  <div class="section-eyebrow">Buscador · Filtrado</div>
+  <h2 class="section-title">Sistema de fechas en 3 niveles</h2>
+  <p class="section-lead">El buscador tiene un sistema inteligente de filtrado por fecha que funciona de forma independiente para cada bloque de resultados.</p>
+  <div class="nivel-block">
+    <div class="nivel-header">
+      <div class="nivel-num n1">1</div>
+      <div><h3>Fecha en el rango del bloque</h3><p>Prioridad más alta — se usa si el usuario la ingresa directamente</p></div>
+    </div>
+    <div class="nivel-body"><p style="font-size:0.85rem;color:var(--gray-600);">Cada tabla de resultados tiene una columna de fecha (por ejemplo <span class="chip">B25:B31</span> para Histórico Sistema Tracto). Si el usuario escribe una o varias fechas directamente en esas celdas <strong>antes de consultar</strong>, el buscador filtra únicamente los registros de esas fechas específicas. Se pueden poner hasta 7 fechas diferentes para consultar múltiples días a la vez.</p></div>
+  </div>
+  <div class="nivel-block">
+    <div class="nivel-header">
+      <div class="nivel-num n2">2</div>
+      <div><h3>Fecha global F5</h3><p>Se usa cuando no hay fecha en el rango del bloque</p></div>
+    </div>
+    <div class="nivel-body"><p style="font-size:0.85rem;color:var(--gray-600);">Si el rango del bloque está vacío pero la celda <span class="chip">F5</span> tiene una fecha (doble clic para poner la fecha de hoy), todos los bloques sin fecha propia usarán esa fecha como filtro global.</p></div>
+  </div>
+  <div class="nivel-block">
+    <div class="nivel-header">
+      <div class="nivel-num n3">3</div>
+      <div><h3>Sin filtro de fecha</h3><p>Se usa cuando no hay ninguna fecha configurada</p></div>
+    </div>
+    <div class="nivel-body"><p style="font-size:0.85rem;color:var(--gray-600);">Si ni el rango del bloque ni <span class="chip">F5</span> tienen fecha, el buscador muestra los registros <strong>más recientes disponibles</strong> para ese ECO u operador, sin importar la fecha.</p></div>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <h4>Cada bloque es independiente</h4>
+      <p>Puedes poner fechas del 14, 15 y 18 de mayo en el bloque de Histórico Sistema y dejar vacío el bloque de Histórico Actual — el primero filtrará esas tres fechas y el segundo traerá lo más reciente. Cada bloque funciona de forma totalmente autónoma.</p>
+    </div>
+  </div>
+</section>
+
+<hr class="divider">
+
+<section class="section" id="operadores">
+  <div class="section-eyebrow">Catálogos</div>
+  <h2 class="section-title">Gestión de Operadores</h2>
+  <p class="section-lead">La hoja OPERADORES mantiene el directorio completo con ficha técnica de cada operador. En v9 la licencia se fragmentó en 3 campos independientes.</p>
+  <div class="flow">
+    <div class="flow-step">
+      <div class="flow-circle">1</div>
+      <div class="flow-content">
+        <h4>Llenar el formulario de alta</h4>
+        <p>En la parte superior completa los campos: Nombre (obligatorio), Credencial, Teléfono, RCONTROL, No. Empleado, RFC, NSS, CURP, N° Licencia, Tipo Licencia, Vigencia Licencia, INE y Estatus.</p>
       </div>
-
-      <div class="nivel-block">
-        <div class="nivel-header">
-          <div class="nivel-num n3">3</div>
-          <div>
-            <h3>Sin filtro de fecha</h3>
-            <p>Se usa cuando no hay ninguna fecha configurada</p>
-          </div>
-        </div>
-        <div class="nivel-body">
-          <p style="font-size:0.85rem; color:var(--gray-600);">Si ni el rango del bloque ni <span class="chip">F5</span> tienen fecha, el buscador muestra los registros <strong>más recientes disponibles</strong> para ese ECO u operador, sin importar la fecha.</p>
-        </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">2</div>
+      <div class="flow-content">
+        <h4>Clic en AGREGAR OPERADOR</h4>
+        <p>El sistema valida que el nombre no esté duplicado, agrega el registro con el formato de la tabla y lo añade automáticamente al catálogo de listas desplegables.</p>
       </div>
-
-      <div class="callout info">
-        <span class="callout-icon">💡</span>
-        <div class="callout-body">
-          <h4>Cada bloque es independiente</h4>
-          <p>Puedes poner fechas del 14, 15 y 18 de mayo en el bloque de Histórico Sistema y dejar vacío el bloque de Histórico Actual — el primero filtrará esas tres fechas y el segundo traerá lo más reciente. Cada bloque funciona de forma totalmente autónoma.</p>
-        </div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-circle">3</div>
+      <div class="flow-content">
+        <h4>El formulario se limpia solo</h4>
+        <p>Una vez guardado, todos los campos del formulario se vacían listos para el siguiente registro.</p>
       </div>
-    </section>
+    </div>
+  </div>
+  <div class="callout info">
+    <span class="callout-icon">📋</span>
+    <div class="callout-body">
+      <h4>Licencia concatenada en el Buscador</h4>
+      <p>Al consultar un operador en el Buscador, la licencia se muestra automáticamente como: <strong>Tipo A | No. LFD00014069 | Vig. 2027</strong> — combinando los 3 campos en un solo dato legible.</p>
+    </div>
+  </div>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin:2rem 0 1rem;">Colores de estatus</h3>
+  <table class="ref-table">
+    <thead><tr><th>Estatus</th><th>Color</th><th>Significado</th></tr></thead>
+    <tbody>
+      <tr><td><strong>Activo</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E1F5EE;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Verde claro</td><td>Operador disponible y en operación regular</td></tr>
+      <tr><td><strong>Capacitación</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFF9C4;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo claro</td><td>En proceso de capacitación o inducción</td></tr>
+      <tr><td><strong>Vacaciones</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E3F2FD;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Azul claro</td><td>En período de descanso o vacaciones</td></tr>
+      <tr><td><strong>Baja</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFEBEE;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Rojo claro</td><td>Dado de baja del sistema</td></tr>
+    </tbody>
+  </table>
+</section>
 
-    <hr class="divider">
+<hr class="divider">
 
-    <!-- OPERADORES -->
-    <section class="section" id="operadores">
-      <div class="section-eyebrow">Catálogos</div>
-      <h2 class="section-title">Gestión de Operadores</h2>
-      <p class="section-lead">La hoja OPERADORES mantiene el directorio completo con ficha técnica de cada operador.</p>
+<section class="section" id="unidades">
+  <div class="section-eyebrow">Catálogos</div>
+  <h2 class="section-title">Gestión de Unidades y Cajas</h2>
+  <p class="section-lead">Las hojas UNIDADES y CAJAS mantienen el inventario de vehículos con sus datos técnicos.</p>
+  <div class="callout tip">
+    <span class="callout-icon">🚛</span>
+    <div class="callout-body">
+      <h4>Alta de unidades y cajas</h4>
+      <p>Igual que con los operadores, cada hoja tiene un formulario en la parte superior. Al agregar un nuevo ECO, se actualiza automáticamente el catálogo de listas desplegables en toda la aplicación.</p>
+    </div>
+  </div>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin:1.5rem 0 1rem;">Colores por tipo de capacidad</h3>
+  <table class="ref-table">
+    <thead><tr><th>Capacidad</th><th>Color</th></tr></thead>
+    <tbody>
+      <tr><td><strong>1.5 UV / 1.5 NP</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#EBF5FB;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Azul claro</td></tr>
+      <tr><td><strong>3.5 / 3.5(6T)</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FEF9E7;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo claro</td></tr>
+      <tr><td><strong>Rabón</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E8F8F5;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Verde claro</td></tr>
+      <tr><td><strong>Tráiler</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#F4ECF7;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Morado claro</td></tr>
+      <tr><td><strong>Van</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFF9C4;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo</td></tr>
+    </tbody>
+  </table>
+</section>
 
-      <div class="flow">
-        <div class="flow-step">
-          <div class="flow-circle">1</div>
-          <div class="flow-content">
-            <h4>Llenar el formulario de alta</h4>
-            <p>En la parte superior de la hoja completa los campos: Nombre (obligatorio), Credencial, Teléfono, RCONTROL, No. Empleado, RFC, NSS, CURP, Licencia, INE y Estatus.</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-circle">2</div>
-          <div class="flow-content">
-            <h4>Clic en AGREGAR OPERADOR</h4>
-            <p>El sistema valida que el nombre no esté duplicado, agrega el registro con el formato de la tabla y lo añade automáticamente al catálogo de listas desplegables.</p>
-          </div>
-        </div>
-        <div class="flow-step">
-          <div class="flow-circle">3</div>
-          <div class="flow-content">
-            <h4>El formulario se limpia solo</h4>
-            <p>Una vez guardado, todos los campos del formulario se vacían listos para el siguiente registro.</p>
-          </div>
-        </div>
-      </div>
+<hr class="divider">
 
-      <h3 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin:2rem 0 1rem;">Colores de estatus</h3>
-      <table class="ref-table">
-        <thead><tr><th>Estatus</th><th>Color</th><th>Significado</th></tr></thead>
-        <tbody>
-          <tr><td><strong>Activo</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E1F5EE;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Verde claro</td><td>Operador disponible y en operación regular</td></tr>
-          <tr><td><strong>Capacitación</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFF9C4;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo claro</td><td>En proceso de capacitación o inducción</td></tr>
-          <tr><td><strong>Vacaciones</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E3F2FD;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Azul claro</td><td>En período de descanso o vacaciones</td></tr>
-          <tr><td><strong>Baja</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFEBEE;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Rojo claro</td><td>Dado de baja del sistema</td></tr>
-        </tbody>
-      </table>
-    </section>
+<section class="section" id="ficha-individual">
+  <div class="section-eyebrow">Nuevo en v9</div>
+  <h2 class="section-title">Ficha Individual</h2>
+  <p class="section-lead">Genera la ficha técnica completa de un operador para una fecha y viaje específicos. Diseñada para compartir con el cliente por correo electrónico.</p>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:1rem;">Campos de entrada</h3>
+  <table class="ref-table">
+    <thead><tr><th>Celda</th><th>Campo</th><th>Tipo</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip">C4</span></td><td>Operador</td><td>Desplegable — lista de OPERADORES</td></tr>
+      <tr><td><span class="chip">C5</span></td><td>Fecha consulta</td><td>Desplegable — fechas visibles en ASIGNACION</td></tr>
+      <tr><td><span class="chip">C6</span></td><td>Tipo de viaje</td><td>Desplegable — Viaje Principal / Segundo Viaje / Tercer Viaje</td></tr>
+      <tr><td><span class="chip">C7</span></td><td>Control vehicular</td><td>Manual</td></tr>
+      <tr><td><span class="chip">C8</span></td><td>Shipment</td><td>Manual</td></tr>
+    </tbody>
+  </table>
+  <div class="callout tip">
+    <span class="callout-icon">✅</span>
+    <div class="callout-body">
+      <h4>Datos que se jalan automáticamente</h4>
+      <p>Al generar la ficha, la macro busca al operador en la columna de la fecha seleccionada y obtiene: ECO tracto y placas de <strong>ASIGNACION</strong>, modelo/color/capacidad de <strong>UNIDADES</strong>, ECO y placa de caja de <strong>CAJAS</strong>, y todos los datos personales de <strong>OPERADORES</strong> incluyendo la licencia concatenada.</p>
+    </div>
+  </div>
+</section>
 
-    <hr class="divider">
+<hr class="divider">
 
-    <!-- UNIDADES -->
-    <section class="section" id="unidades">
-      <div class="section-eyebrow">Catálogos</div>
-      <h2 class="section-title">Gestión de Unidades y Cajas</h2>
-      <p class="section-lead">Las hojas UNIDADES y CAJAS mantienen el inventario de vehículos con sus datos técnicos.</p>
+<section class="section" id="ficha-colectiva">
+  <div class="section-eyebrow">Nuevo en v9</div>
+  <h2 class="section-title">Ficha Colectiva</h2>
+  <p class="section-lead">Genera un reporte con múltiples operadores para una misma fecha. Permite especificar el tipo de viaje por operador individualmente. Ideal para envíos masivos al cliente.</p>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin-bottom:1rem;">Inputs globales</h3>
+  <table class="ref-table">
+    <thead><tr><th>Celda</th><th>Campo</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip">C4</span></td><td>Fecha global</td><td>Obligatoria — aplica a todos los operadores de la lista</td></tr>
+      <tr><td><span class="chip">E4</span></td><td>Viaje global</td><td>Opcional — se usa como default para operadores sin viaje especificado</td></tr>
+    </tbody>
+  </table>
+  <h3 style="font-size:0.95rem;font-weight:700;color:var(--navy);margin:1.5rem 0 1rem;">Tabla de operadores (filas 9-18)</h3>
+  <table class="ref-table">
+    <thead><tr><th>Columna</th><th>Campo</th><th>Nota</th></tr></thead>
+    <tbody>
+      <tr><td>B</td><td>Viaje</td><td>Opcional por fila. Si está vacío usa el viaje global</td></tr>
+      <tr><td>C</td><td>Operador</td><td>Nombre del operador — desplegable</td></tr>
+      <tr><td>D</td><td>Folio</td><td>Folio manual del cliente (no el GMX)</td></tr>
+    </tbody>
+  </table>
+  <div class="callout info">
+    <span class="callout-icon">💡</span>
+    <div class="callout-body">
+      <h4>Lógica de prioridad del viaje</h4>
+      <p><strong>1° Prioridad:</strong> Viaje especificado en la fila del operador.<br>
+      <strong>2° Prioridad:</strong> Viaje global (celda E4).<br>
+      Si ninguno está especificado, la macro toma el primer viaje que encuentre para ese operador en esa fecha.</p>
+    </div>
+  </div>
+  <div class="callout warn">
+    <span class="callout-icon">⚠️</span>
+    <div class="callout-body">
+      <h4>Operadores no encontrados</h4>
+      <p>Si algún operador no tiene viaje asignado en la fecha seleccionada, la macro lo salta y al final muestra un resumen con los nombres que no se pudieron incluir.</p>
+    </div>
+  </div>
+</section>
 
-      <div class="callout tip">
-        <span class="callout-icon">🚛</span>
-        <div class="callout-body">
-          <h4>Alta de unidades y cajas</h4>
-          <p>Igual que con los operadores, cada hoja tiene un formulario en la parte superior. Al agregar un nuevo ECO, se actualiza automáticamente el catálogo de listas desplegables en toda la aplicación.</p>
-        </div>
-      </div>
+<hr class="divider">
 
-      <h3 style="font-size:0.95rem; font-weight:700; color:var(--navy); margin:1.5rem 0 1rem;">Colores por tipo de capacidad</h3>
-      <table class="ref-table">
-        <thead><tr><th>Capacidad</th><th>Color</th></tr></thead>
-        <tbody>
-          <tr><td><strong>1.5 UV / 1.5 NP</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#EBF5FB;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Azul claro</td></tr>
-          <tr><td><strong>3.5 / 3.5(6T)</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FEF9E7;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo claro</td></tr>
-          <tr><td><strong>Rabón</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#E8F8F5;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Verde claro</td></tr>
-          <tr><td><strong>Trailer</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#F4ECF7;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Morado claro</td></tr>
-          <tr><td><strong>Van</strong></td><td><span style="display:inline-block;width:14px;height:14px;background:#FFF9C4;border:1px solid #ccc;border-radius:3px;vertical-align:middle;margin-right:6px;"></span>Amarillo</td></tr>
-        </tbody>
-      </table>
-    </section>
+<section class="section" id="perfiles">
+  <div class="section-eyebrow">Referencia rápida</div>
+  <h2 class="section-title">Guía por perfil de usuario</h2>
+  <div class="two-col">
+    <div class="card-simple">
+      <div style="font-size:1.5rem;margin-bottom:0.75rem;">🚦</div>
+      <h3>Tráfico · Día a día</h3>
+      <ul>
+        <li>Llenar ASIGNACION con los 10 campos por viaje</li>
+        <li>Usar doble clic en FECHA y HORARIO ENTREGA</li>
+        <li>Ejecutar <strong>Propagar Entrega</strong> para servicios foráneos</li>
+        <li>Ejecutar <strong>Guardar Registro</strong> al final del día</li>
+        <li>Ejecutar <strong>Renovar Calendario</strong> cuando se necesite</li>
+        <li>Dar de alta operadores y unidades nuevas</li>
+      </ul>
+    </div>
+    <div class="card-simple">
+      <div style="font-size:1.5rem;margin-bottom:0.75rem;">📊</div>
+      <h3>Dirección · Consulta</h3>
+      <ul>
+        <li>Consultar <strong>ASIGNACION</strong> para ver la planeación</li>
+        <li>Usar el <strong>Buscador por Folio</strong> para verificar servicios</li>
+        <li>Usar el <strong>Buscador por Operador</strong> para ficha técnica</li>
+        <li>Generar <strong>Fichas Individuales</strong> para clientes</li>
+        <li>Generar <strong>Fichas Colectivas</strong> para envíos masivos</li>
+        <li>Revisar <strong>HISTORICO_SISTEMA</strong> para análisis histórico</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <hr class="divider">
-
-    <!-- PERFILES -->
-    <section class="section" id="perfiles">
-      <div class="section-eyebrow">Referencia rápida</div>
-      <h2 class="section-title">Guía por perfil de usuario</h2>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.5rem;">
-        <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:1rem; padding:1.5rem;">
-          <div style="font-size:1.5rem; margin-bottom:0.75rem;">🚦</div>
-          <h3 style="font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:0.75rem;">Tráfico · Día a día</h3>
-          <ul style="font-size:0.82rem; color:var(--gray-600); line-height:2; padding-left:1.2rem;">
-            <li>Llenar ASIGNACION con operador, cliente, origen, destino y folio</li>
-            <li>Ejecutar <strong>Guardar Registro</strong> al final del día</li>
-            <li>Ejecutar <strong>Renovar Calendario</strong> cuando se necesite más espacio</li>
-            <li>Usar el <strong>Buscador</strong> para consultar el historial de una unidad</li>
-            <li>Dar de alta operadores y unidades nuevas en sus respectivas hojas</li>
-          </ul>
-        </div>
-        <div style="background:var(--white); border:1px solid var(--gray-200); border-radius:1rem; padding:1.5rem;">
-          <div style="font-size:1.5rem; margin-bottom:0.75rem;">📊</div>
-          <h3 style="font-size:1rem; font-weight:700; color:var(--navy); margin-bottom:0.75rem;">Dirección · Consulta</h3>
-          <ul style="font-size:0.82rem; color:var(--gray-600); line-height:2; padding-left:1.2rem;">
-            <li>Consultar <strong>ASIGNACION</strong> para ver la planeación de los próximos días</li>
-            <li>Usar el <strong>Buscador por Folio</strong> para verificar el estado de un servicio</li>
-            <li>Usar el <strong>Buscador por Operador</strong> para ver la ficha técnica y el historial</li>
-            <li>Revisar <strong>HISTORICO_SISTEMA</strong> para análisis de servicios pasados</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-  </main>
+</main>
 </div>
 
 <footer class="footer">
-  <strong>GMAX Logistic</strong> · Bitácora de Servicios v8 · Manual de Usuario<br>
+  <strong>GMAX Logistic</strong> · Bitácora de Servicios v9 · Manual de Usuario<br>
   Desarrollado a medida para el equipo de Tráfico GMAX
 </footer>
 
